@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eng. Fernando Pavanello — Engenharia Civil & Construção</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0B0B0B;
+      --bg2: #111111;
+      --bg3: #161616;
+      --accent: #E8A020;
+      --accent2: #FF6B2B;
+      --text: #F2F2F2;
+      --muted: #7A7A7A;
+      --border: rgba(255,255,255,0.07);
+      --card: #141414;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Sora', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5vw;
+      background: rgba(11,11,11,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: 2px;
+      color: var(--text);
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent);
+      color: #000;
+      padding: 0.55rem 1.4rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 5vw 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(135deg, rgba(232,160,32,0.06) 0%, transparent 50%),
+        linear-gradient(to bottom, rgba(11,11,11,0) 60%, var(--bg) 100%);
+      z-index: 0;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 20% 50%, black 30%, transparent 75%);
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-label::before {
+      content: ''; width: 28px; height: 2px; background: var(--accent);
+    }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 9rem);
+      line-height: 0.92;
+      letter-spacing: -1px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      -webkit-text-stroke: 1.5px var(--accent);
+      color: transparent;
+    }
+    .hero p {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+    .btn-ghost {
+      color: var(--text);
+      font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 1px; text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--accent); }
+    .btn-ghost::after { content: '→'; font-size: 1.1rem; }
+
+    .hero-stats {
+      position: absolute; right: 5vw; bottom: 3rem;
+      display: flex; gap: 3rem; z-index: 1;
+    }
+    .stat { text-align: right; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem; line-height: 1;
+      color: var(--text);
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--accent);
+      padding: 0.85rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 30s linear infinite;
+    }
+    .marquee-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem; letter-spacing: 3px;
+      color: #000;
+      padding: 0 2.5rem;
+    }
+    .marquee-sep { color: rgba(0,0,0,0.3); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 5vw; }
+    .section-tag {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--accent);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .section-tag::before { content:''; width:20px; height:2px; background:var(--accent); }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.5px;
+      margin-bottom: 1.2rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 480px;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ── SOBRE ── */
+    .about { background: var(--bg2); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-img {
+      position: relative;
+    }
+    .about-img-box {
+      width: 100%; aspect-ratio: 4/5;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-img-inner {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #1a1a1a 0%, #222 50%, #1a1a1a 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-img-icon {
+      font-size: 6rem; opacity: 0.15;
+    }
+    .about-badge {
+      position: absolute; bottom: -1rem; right: -1rem;
+      background: var(--accent);
+      color: #000;
+      padding: 1.5rem;
+      text-align: center;
+      width: 120px;
+    }
+    .about-badge-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem; line-height: 1;
+      display: block;
+    }
+    .about-badge-txt { font-size: 0.62rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .about-text .section-title { margin-bottom: 1.5rem; }
+    .about-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .about-list li {
+      display: flex; align-items: center; gap: 0.8rem;
+      font-size: 0.9rem; color: var(--muted);
+    }
+    .about-list li::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--accent); border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── SERVIÇOS ── */
+    .services-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 3rem; gap: 2rem; flex-wrap: wrap;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .service-card {
+      background: var(--card);
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: background 0.3s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 0; height: 3px;
+      background: var(--accent);
+      transition: width 0.4s ease;
+    }
+    .service-card:hover { background: #1a1a1a; }
+    .service-card:hover::before { width: 100%; }
+    .service-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem; line-height: 1;
+      color: rgba(255,255,255,0.04);
+      position: absolute; top: 0.5rem; right: 1rem;
+      transition: color 0.3s;
+    }
+    .service-card:hover .service-num { color: rgba(232,160,32,0.08); }
+    .service-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
+    .service-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.8rem;
+      color: var(--text);
+    }
+    .service-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; font-weight: 300; }
+    .service-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 1.2rem; font-size: 0.75rem;
+      font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--accent); text-decoration: none;
+      opacity: 0; transform: translateX(-8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .service-card:hover .service-link { opacity: 1; transform: translateX(0); }
+    .service-link::after { content: '→'; }
+
+    /* ── PROCESSO ── */
+    .process { background: var(--bg2); }
+    .process-header { text-align: center; margin-bottom: 4rem; }
+    .process-header .section-tag { justify-content: center; }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 2.2rem; left: 12.5%; right: 12.5%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent));
+      z-index: 0;
+    }
+    .step {
+      text-align: center;
+      padding: 0 1.5rem;
+      position: relative; z-index: 1;
+    }
+    .step-num {
+      width: 4.5rem; height: 4.5rem;
+      border: 2px solid var(--accent);
+      background: var(--bg2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+      transition: background 0.3s, color 0.3s;
+    }
+    .step:hover .step-num { background: var(--accent); color: #000; }
+    .step h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem; letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+    .step p { font-size: 0.82rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+    /* ── DIFERENCIAIS ── */
+    .diferencial-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .feat-list { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2.5rem; }
+    .feat {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .feat:hover { border-color: var(--accent); background: #161616; }
+    .feat-icon {
+      font-size: 1.5rem; flex-shrink: 0;
+      width: 3rem; height: 3rem;
+      background: rgba(232,160,32,0.1);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feat-body h4 {
+      font-weight: 600; font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+    .feat-body p { font-size: 0.82rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
+    .diferencial-visual {
+      position: relative;
+      aspect-ratio: 1;
+    }
+    .d-visual-ring {
+      width: 100%; height: 100%;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      position: absolute;
+      animation: pulse 4s ease-in-out infinite;
+    }
+    .d-visual-ring:nth-child(2) { width: 75%; height: 75%; top: 12.5%; left: 12.5%; animation-delay: 0.5s; border-color: rgba(232,160,32,0.15); }
+    .d-visual-ring:nth-child(3) { width: 50%; height: 50%; top: 25%; left: 25%; animation-delay: 1s; border-color: rgba(232,160,32,0.25); }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+    .d-visual-center {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+    }
+    .d-visual-center .big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem; line-height: 1;
+      color: var(--accent);
+    }
+    .d-visual-center .small {
+      font-size: 0.75rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      padding: 5rem 5vw;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: 'CONTATO';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20rem; line-height: 1;
+      color: rgba(0,0,0,0.07);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .cta-band h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: #000;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+    .cta-band p { color: rgba(0,0,0,0.6); margin-bottom: 2rem; font-size: 1rem; }
+    .btn-dark {
+      background: #000; color: var(--accent);
+      padding: 0.9rem 2.5rem;
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; display: inline-block;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-dark:hover { background: #111; transform: translateY(-2px); }
+
+    /* ── CONTATO ── */
+    .contact { background: var(--bg2); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+    .contact-info { padding-top: 1rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+    .c-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .c-icon {
+      width: 2.5rem; height: 2.5rem; flex-shrink: 0;
+      background: rgba(232,160,32,0.1);
+      border: 1px solid rgba(232,160,32,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .c-body small { font-size: 0.7rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+    .c-body p { font-size: 0.9rem; margin-top: 0.1rem; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .field label {
+      display: block; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.4rem;
+    }
+    .field input, .field textarea, .field select {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.8rem 1rem;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: var(--accent);
+    }
+    .field textarea { resize: vertical; min-height: 120px; }
+    .field select option { background: #111; }
+    .submit-btn {
+      background: var(--accent);
+      color: #000;
+      padding: 1rem 2rem;
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      align-self: flex-start;
+    }
+    .submit-btn:hover { background: var(--accent2); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 3rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem; letter-spacing: 2px;
+    }
+    .footer-logo span { color: var(--accent); }
+    footer p { font-size: 0.78rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a {
+      font-size: 0.75rem; color: var(--muted);
+      text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── PARCEIROS ── */
+    .partners {
+      background: var(--bg2);
+      padding: 2.5rem 5vw;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .partners-label {
+      text-align: center; font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
+      margin-bottom: 1.8rem;
+    }
+    .partners-inner {
+      display: flex; align-items: center; justify-content: center;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .partner-card {
+      background: #fff;
+      padding: 1.2rem 2.2rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      min-width: 200px;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .partner-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(232,160,32,0.15); }
+    .partner-card svg { display: block; }
+    .partner-sub { font-size: 0.6rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #888; }
+    .partner-sep {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem; color: var(--border);
+    }
+
+    /* ── GALLERY ── */
+    .gallery { padding: 6rem 5vw; background: var(--bg); }
+    .gallery-header { margin-bottom: 3rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 260px 260px;
+      gap: 8px;
+    }
+    .gallery-item { overflow: hidden; position: relative; background: var(--card); }
+    .gallery-item.featured { grid-row: span 2; }
+    .gallery-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.4s;
+      filter: brightness(0.82) saturate(0.9);
+      display: block;
+    }
+    .gallery-item:hover .gallery-img { transform: scale(1.07); filter: brightness(1) saturate(1); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,11,11,0.65) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .gallery-tag {
+      position: absolute; bottom: 0.9rem; left: 1rem;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(255,255,255,0.85);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-tag { opacity: 1; }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wpp-float {
+      position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 999;
+      display: flex; align-items: center; gap: 0.7rem;
+      text-decoration: none;
+    }
+    .wpp-tooltip {
+      background: #111; color: #fff;
+      padding: 0.45rem 1rem;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px;
+      border-radius: 3px;
+      white-space: nowrap;
+      opacity: 0; transform: translateX(8px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    }
+    .wpp-float:hover .wpp-tooltip { opacity: 1; transform: translateX(0); }
+    .wpp-btn {
+      width: 3.6rem; height: 3.6rem;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.45);
+      animation: wpp-pulse 2.5s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .wpp-btn svg { width: 1.9rem; height: 1.9rem; fill: white; }
+    @keyframes wpp-pulse {
+      0%,100% { box-shadow: 0 4px 18px rgba(37,211,102,0.4); }
+      50%      { box-shadow: 0 4px 32px rgba(37,211,102,0.75); }
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hero-stats { position: relative; right: auto; bottom: auto; margin-top: 3rem; justify-content: flex-start; }
+      .about-grid, .diferencial-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .process-steps::before { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .diferencial-visual { display: none; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item.featured { grid-row: span 1; grid-column: span 2; height: 220px; }
+      .gallery-item { height: 160px; }
+      .partners-inner { gap: 1.2rem; }
+      .partner-sep { display: none; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">PAVANELLO<span>.ENG</span></div>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#obras">Obras</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="#contato" class="nav-cta">Orçamento</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-label">Eng. Fernando Pavanello — CREA 5070199189</div>
+    <h1>REALIZAMOS<br/><em>SONHOS</em><br/>PRÓPRIOS</h1>
+    <p>Mais de 200 sonhos próprios realizados em todo o estado de São Paulo e Mato Grosso do Sul. Entre em contato e faça uma simulação <strong style="color:var(--accent)">sem nenhum custo</strong>.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5517997420107?text=Olá%20Eng.%20Fernando!%20Gostaria%20de%20fazer%20uma%20simulação%20gratuita." target="_blank" class="btn-primary">💬 Simulação Gratuita</a>
+      <a href="#servicos" class="btn-ghost">Ver Serviços</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">200<span>+</span></div>
+      <div class="stat-label">Sonhos realizados</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2<span></span></div>
+      <div class="stat-label">Estados atendidos</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Simulação gratuita</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">CONSTRUÇÃO CIVIL</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">REFORMA E ACABAMENTO</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">FINANCIAMENTO IMOBILIÁRIO</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">TODO ESTADO DE SÃO PAULO</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">REGULARIZAÇÃO DE OBRA</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">ALVARÁ DE BOMBEIROS</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">MATO GROSSO DO SUL</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">SIMULAÇÃO GRATUITA</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">CONSTRUÇÃO CIVIL</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">REFORMA E ACABAMENTO</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">FINANCIAMENTO IMOBILIÁRIO</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">TODO ESTADO DE SÃO PAULO</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">REGULARIZAÇÃO DE OBRA</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">ALVARÁ DE BOMBEIROS</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">MATO GROSSO DO SUL</span><span class="marquee-item marquee-sep">✦</span>
+    <span class="marquee-item">SIMULAÇÃO GRATUITA</span><span class="marquee-item marquee-sep">✦</span>
+  </div>
+</div>
+
+<!-- PARCEIROS -->
+<div class="partners fade-up">
+  <p class="partners-label">✦ Credenciado e Habilitado ✦</p>
+  <div class="partners-inner">
+
+    <!-- CAIXA ECONÔMICA FEDERAL -->
+    <div class="partner-card">
+      <svg viewBox="0 0 260 62" width="200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="xOrange"><rect x="134" y="0" width="38" height="62"/></clipPath>
+        </defs>
+        <!-- CAIXA full blue -->
+        <text x="4" y="52" font-family="'Arial Black',Arial,sans-serif" font-size="56" font-weight="900" fill="#003082">CAIXA</text>
+        <!-- Orange right-half of X -->
+        <text x="4" y="52" font-family="'Arial Black',Arial,sans-serif" font-size="56" font-weight="900" fill="#F47920" clip-path="url(#xOrange)">CAIXA</text>
+        <!-- Subtitle -->
+        <text x="4" y="62" font-family="Arial,sans-serif" font-size="8" font-weight="600" fill="#003082" letter-spacing="1.5">ECONÔMICA FEDERAL</text>
+      </svg>
+      <span class="partner-sub">Agente Financeiro Oficial</span>
+    </div>
+
+    <div class="partner-sep">+</div>
+
+    <!-- MINHA CASA MINHA VIDA -->
+    <div class="partner-card">
+      <svg viewBox="0 0 260 70" width="200" xmlns="http://www.w3.org/2000/svg">
+        <!-- House icon -->
+        <polygon points="34,36 52,16 70,36" fill="#006D3A"/>
+        <rect x="38" y="36" width="28" height="22" fill="#006D3A" rx="1"/>
+        <rect x="45" y="42" width="14" height="16" fill="white"/>
+        <!-- Vertical line on door -->
+        <line x1="52" y1="42" x2="52" y2="58" stroke="#006D3A" stroke-width="1.5"/>
+        <!-- Sun rays top-right of house -->
+        <circle cx="66" cy="20" r="5" fill="#F5A623"/>
+        <line x1="66" y1="12" x2="66" y2="9" stroke="#F5A623" stroke-width="2"/>
+        <line x1="72" y1="14" x2="74" y2="12" stroke="#F5A623" stroke-width="2"/>
+        <line x1="74" y1="20" x2="77" y2="20" stroke="#F5A623" stroke-width="2"/>
+        <!-- Program name -->
+        <text x="85" y="28" font-family="'Arial',sans-serif" font-size="12.5" font-weight="900" fill="#006D3A">MINHA CASA</text>
+        <text x="85" y="45" font-family="'Arial',sans-serif" font-size="12.5" font-weight="900" fill="#006D3A">MINHA VIDA</text>
+        <!-- Bottom bar -->
+        <rect x="0" y="64" width="260" height="4" fill="#006D3A" rx="1"/>
+        <!-- Gov label -->
+        <text x="85" y="61" font-family="Arial,sans-serif" font-size="7" fill="#555" letter-spacing="1.2">GOVERNO FEDERAL</text>
+      </svg>
+      <span class="partner-sub">Programa Habitacional</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section class="about" id="sobre">
+  <div class="about-grid">
+    <div class="about-img fade-up">
+      <div class="about-img-box">
+        <div class="about-img-inner">
+          <div class="about-img-icon">🏗️</div>
+        </div>
+      </div>
+      <div class="about-badge">
+        <span class="about-badge-num">15+</span>
+        <span class="about-badge-txt">Anos no mercado</span>
+      </div>
+    </div>
+    <div class="about-text fade-up">
+      <div class="section-tag">Quem Somos</div>
+      <h2 class="section-title">REFERÊNCIA EM<br/>ENGENHARIA<br/>CIVIL</h2>
+      <p class="section-sub">Fernando Pavanello é engenheiro civil registrado no CREA (5070199189) e CRECI (143190), com mais de <strong style="color:var(--accent)">200 sonhos próprios realizados</strong>. Atende com excelência em todo o estado de São Paulo e Mato Grosso do Sul, oferecendo soluções completas da planta à chave.</p>
+      <ul class="about-list">
+        <li>Mais de 200 imóveis próprios financiados e entregues</li>
+        <li>Atendimento em todo o estado de São Paulo e Mato Grosso do Sul</li>
+        <li>Simulação de financiamento 100% gratuita e sem compromisso</li>
+        <li>Suporte completo em regularização, AVCB e alvará</li>
+        <li>Transparência total do contrato à entrega das chaves</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="services-header fade-up">
+    <div>
+      <div class="section-tag">O Que Fazemos</div>
+      <h2 class="section-title">NOSSOS<br/>SERVIÇOS</h2>
+    </div>
+    <p class="section-sub">Soluções completas para todas as suas necessidades em engenharia e construção civil.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <span class="service-num">01</span>
+      <span class="service-icon">🏠</span>
+      <h3>Construção Civil</h3>
+      <p>Execução de obras residenciais, comerciais e industriais com rigor técnico. Desde a fundação até o acabamento, garantindo qualidade e segurança estrutural.</p>
+      <a href="#contato" class="service-link">Solicitar</a>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">02</span>
+      <span class="service-icon">🔨</span>
+      <h3>Reforma e Acabamento</h3>
+      <p>Reformas completas ou parciais com acabamentos de alta qualidade. Modernize seu espaço com eficiência, mantendo prazo e orçamento acordados.</p>
+      <a href="#contato" class="service-link">Solicitar</a>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">03</span>
+      <span class="service-icon">💰</span>
+      <h3>Financiamento Imobiliário</h3>
+      <p>Assessoria completa para obtenção de crédito imobiliário. Orientamos em todas as etapas do processo junto aos bancos e instituições financeiras.</p>
+      <a href="#contato" class="service-link">Solicitar</a>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">04</span>
+      <span class="service-icon">📋</span>
+      <h3>Regularização de Obra</h3>
+      <p>Regularização de construções irregulares junto à prefeitura e cartório. Averbação, habite-se, certidão de conclusão de obra e demais documentações.</p>
+      <a href="#contato" class="service-link">Solicitar</a>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">05</span>
+      <span class="service-icon">🚒</span>
+      <h3>Alvará de Bombeiros</h3>
+      <p>Elaboração de projetos de PPCI e AVCB. Adequação de edificações às normas do Corpo de Bombeiros para obtenção do alvará de funcionamento.</p>
+      <a href="#contato" class="service-link">Solicitar</a>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-num">06</span>
+      <span class="service-icon">📐</span>
+      <h3>Projetos e Laudos</h3>
+      <p>Elaboração de projetos arquitetônicos, estruturais, elétricos e hidráulicos. Laudos técnicos de vistoria, avaliação e perícia de engenharia.</p>
+      <a href="#contato" class="service-link">Solicitar</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section class="process" id="processo">
+  <div class="process-header fade-up">
+    <div class="section-tag">Como Trabalhamos</div>
+    <h2 class="section-title">NOSSO PROCESSO</h2>
+    <p class="section-sub" style="margin: 0 auto;">Da consulta inicial à entrega final, acompanhamos cada etapa com transparência e compromisso.</p>
+  </div>
+  <div class="process-steps">
+    <div class="step fade-up">
+      <div class="step-num">01</div>
+      <h4>Consulta & Diagnóstico</h4>
+      <p>Analisamos suas necessidades e realizamos vistoria técnica no local para entender o escopo completo do projeto.</p>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">02</div>
+      <h4>Proposta & Projeto</h4>
+      <p>Elaboramos orçamento detalhado e o projeto técnico, com cronograma e especificações de materiais e serviços.</p>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">03</div>
+      <h4>Execução</h4>
+      <p>Iniciamos a obra com equipe especializada, acompanhamento diário e relatórios periódicos para o cliente.</p>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">04</div>
+      <h4>Entrega & Regularização</h4>
+      <p>Entregamos a obra concluída e cuidamos de toda a documentação necessária para regularização e habite-se.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais">
+  <div class="diferencial-grid">
+    <div class="fade-up">
+      <div class="section-tag">Por Que Nos Escolher</div>
+      <h2 class="section-title">NOSSOS<br/>DIFERENCIAIS</h2>
+      <div class="feat-list">
+        <div class="feat">
+          <div class="feat-icon">⚡</div>
+          <div class="feat-body">
+            <h4>Agilidade e Prazo</h4>
+            <p>Cumprimos rigorosamente os prazos acordados em contrato, sem surpresas no cronograma.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">🛡️</div>
+          <div class="feat-body">
+            <h4>Garantia Técnica</h4>
+            <p>Todas as obras possuem garantia técnica e ART (Anotação de Responsabilidade Técnica) do engenheiro responsável.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">💎</div>
+          <div class="feat-body">
+            <h4>Qualidade Certificada</h4>
+            <p>Utilizamos apenas materiais certificados e seguimos as normas técnicas ABNT em todos os serviços.</p>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-icon">📊</div>
+          <div class="feat-body">
+            <h4>Transparência Total</h4>
+            <p>Orçamentos detalhados sem letra miúda e relatórios de obra periódicos para total controle do cliente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="diferencial-visual fade-up">
+      <div class="d-visual-ring"></div>
+      <div class="d-visual-ring"></div>
+      <div class="d-visual-ring"></div>
+      <div class="d-visual-center">
+        <span class="big" style="font-size:2.8rem; line-height:1.3;">CREA<br/>CRECI</span>
+        <span class="small" style="margin-top:0.5rem;">5070199189<br/>143190</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBRAS -->
+<section class="gallery" id="obras">
+  <div class="gallery-header fade-up">
+    <div class="section-tag">Portfólio</div>
+    <h2 class="section-title">NOSSAS<br/>OBRAS</h2>
+    <p class="section-sub">Cada obra entregue é um sonho realizado. Confira alguns dos projetos concluídos pelo Eng. Fernando Pavanello.</p>
+  </div>
+  <div class="gallery-grid">
+
+    <div class="gallery-item featured fade-up">
+      <img class="gallery-img"
+        src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=85&fit=crop"
+        alt="Casa construída — obra residencial"
+        onerror="this.style.background='#1a1a1a';this.src=''" />
+      <div class="gallery-overlay"></div>
+      <span class="gallery-tag">Construção Residencial</span>
+    </div>
+
+    <div class="gallery-item fade-up">
+      <img class="gallery-img"
+        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=85&fit=crop"
+        alt="Casa moderna entregue"
+        onerror="this.style.background='#1a1a1a';this.src=''" />
+      <div class="gallery-overlay"></div>
+      <span class="gallery-tag">Acabamento Premium</span>
+    </div>
+
+    <div class="gallery-item fade-up">
+      <img class="gallery-img"
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85&fit=crop"
+        alt="Residência nova"
+        onerror="this.style.background='#1a1a1a';this.src=''" />
+      <div class="gallery-overlay"></div>
+      <span class="gallery-tag">Minha Casa Minha Vida</span>
+    </div>
+
+    <div class="gallery-item fade-up">
+      <img class="gallery-img"
+        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=85&fit=crop"
+        alt="Obra em andamento"
+        onerror="this.style.background='#1a1a1a';this.src=''" />
+      <div class="gallery-overlay"></div>
+      <span class="gallery-tag">Obra em Andamento</span>
+    </div>
+
+    <div class="gallery-item fade-up">
+      <img class="gallery-img"
+        src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=85&fit=crop"
+        alt="Casa com área externa"
+        onerror="this.style.background='#1a1a1a';this.src=''" />
+      <div class="gallery-overlay"></div>
+      <span class="gallery-tag">Reforma Completa</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band fade-up">
+  <h2>FAÇA SUA SIMULAÇÃO<br/>SEM NENHUM CUSTO</h2>
+  <p>Atendemos todo o estado de São Paulo e Mato Grosso do Sul — mais de 200 sonhos realizados te esperam.</p>
+  <a href="https://wa.me/5517997420107?text=Olá%20Eng.%20Fernando!%20Gostaria%20de%20fazer%20uma%20simulação%20gratuita." target="_blank" class="btn-dark">💬 Chamar no WhatsApp</a>
+</div>
+
+<!-- CONTATO -->
+<section class="contact" id="contato">
+  <div class="contact-grid">
+    <div class="contact-info fade-up">
+      <div class="section-tag">Fale Conosco</div>
+      <h2 class="section-title">ENTRE EM<br/>CONTATO</h2>
+      <p class="section-sub">Faça sua simulação <strong style="color:var(--accent)">gratuitamente</strong> e sem compromisso. Atendemos todo o estado de São Paulo e Mato Grosso do Sul.</p>
+      <div class="contact-items">
+        <div class="c-item">
+          <div class="c-icon">📞</div>
+          <div class="c-body">
+            <small>Telefone / WhatsApp</small>
+            <p><a href="https://wa.me/5517997420107" target="_blank" style="color:var(--accent);text-decoration:none;">+55 (17) 99742-0107</a></p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📧</div>
+          <div class="c-body">
+            <small>E-mail</small>
+            <p><a href="mailto:Prf.eng123@gmail.com" style="color:var(--accent);text-decoration:none;">Prf.eng123@gmail.com</a></p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📍</div>
+          <div class="c-body">
+            <small>Endereço</small>
+            <p>Rua Lourenço Taques, nº 1427</p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">🗺️</div>
+          <div class="c-body">
+            <small>Área de Atendimento</small>
+            <p>Todo o Estado de São Paulo &amp; Mato Grosso do Sul</p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">🏛️</div>
+          <div class="c-body">
+            <small>Registros Profissionais</small>
+            <p>CREA 5070199189 &nbsp;|&nbsp; CRECI 143190</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up">
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="field">
+            <label>Nome</label>
+            <input type="text" placeholder="Seu nome completo" />
+          </div>
+          <div class="field">
+            <label>Telefone</label>
+            <input type="tel" placeholder="(00) 00000-0000" />
+          </div>
+        </div>
+        <div class="field">
+          <label>E-mail</label>
+          <input type="email" placeholder="seu@email.com" />
+        </div>
+        <div class="field">
+          <label>Serviço de Interesse</label>
+          <select>
+            <option value="" disabled selected>Selecione um serviço</option>
+            <option>Construção Civil</option>
+            <option>Reforma e Acabamento</option>
+            <option>Financiamento Imobiliário</option>
+            <option>Regularização de Obra</option>
+            <option>Alvará de Bombeiros</option>
+            <option>Projetos e Laudos</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Mensagem</label>
+          <textarea placeholder="Descreva brevemente seu projeto ou necessidade..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="alert('Mensagem enviada! Entraremos em contato em breve.')">Enviar Mensagem →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">PAVANELLO<span>.ENG</span></div>
+  <p>© 2025 Eng. Fernando Pavanello — CREA 5070199189 | CRECI 143190</p>
+  <ul class="footer-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Intersection Observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.style.background = 'rgba(11,11,11,0.98)';
+    } else {
+      nav.style.background = 'rgba(11,11,11,0.85)';
+    }
+  });
+</script>
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/5517997420107?text=Olá%20Eng.%20Fernando!%20Gostaria%20de%20fazer%20uma%20simulação%20gratuita."
+   target="_blank" class="wpp-float" aria-label="Falar no WhatsApp">
+  <span class="wpp-tooltip">💬 Simulação Gratuita</span>
+  <div class="wpp-btn">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </div>
+</a>
+
+</body>
+</html>
